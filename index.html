@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Req Https CyberPi </title>
+    <title>Req HTTP CyberPi</title>
 </head>
 <body style="margin:0;display:flex;flex-direction:column;height:100vh;">
 
@@ -11,19 +11,18 @@
 <button onclick="clearTxt()" style="height:60px;">Effacer</button>
 
 <script>
+const DB_URL = "https://req-http-cyberpi-default-rtdb.firebaseio.com";
+
 function send() {
   let text = document.getElementById("txt").value;
 
-  fetch("https://api.jsonbin.io/v3/b/69d7f924856a682189177bfc", {
+  fetch(DB_URL + "/message.json", {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Master-Key": "$2a$10$9Kb.ZSEo1pfKmjqVJ8djdOVVgW2jZ6azY6WxxoOhfBVNZlm4rUbjK"
-    },
-    body: JSON.stringify({
-      msg: text
-    })
-  });
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ msg: text })
+  })
+  .then(() => alert("Envoyé !"))
+  .catch(e => alert("Erreur : " + e));
 }
 
 function clearTxt() {
