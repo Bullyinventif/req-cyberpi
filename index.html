@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Req Https CyberPi </title>
+</head>
+<body style="margin:0;display:flex;flex-direction:column;height:100vh;">
+
+<textarea id="txt" maxlength="100" style="flex:1;font-size:20px;"></textarea>
+
+<button onclick="send()" style="height:60px;">Envoyer</button>
+<button onclick="clearTxt()" style="height:60px;">Effacer</button>
+
+<script>
+function send() {
+  let text = document.getElementById("txt").value;
+
+  fetch("https://api.jsonbin.io/v3/b/69d7f924856a682189177bfc", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Master-Key": "$2a$10$9Kb.ZSEo1pfKmjqVJ8djdOVVgW2jZ6azY6WxxoOhfBVNZlm4rUbjK"
+    },
+    body: JSON.stringify({
+      msg: text
+    })
+  });
+}
+
+function clearTxt() {
+  document.getElementById("txt").value = "";
+}
+</script>
+
+</body>
+</html>
